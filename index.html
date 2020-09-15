@@ -5,7 +5,7 @@
             const urlParams = new URLSearchParams(window.location.search)
             const mode = urlParams.get('mode')
             let speed = urlParams.get('speed')
-            speed = speed ? parseInt(speed) : 10
+            speed = speed ? parseInt(speed) : 5
 
             console.log(mode, speed)
 
@@ -33,9 +33,7 @@
                 } else if (rgb[dimP] <= min && currDim > dimToChange) {
                     dimToChange = it + 1
                     addF *= -1
-                } else {
-                    console.log("nani")
-                }
+                } 
 
                 rgb[dimP] += addF
                 // body.backgroundColor = "#"+ rgb.map(v => {return v.toString(16)}).join('')
