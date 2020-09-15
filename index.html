@@ -1,0 +1,47 @@
+<html>
+    <head></head>
+    <body>
+        <script type="text/javascript">
+            const urlParams = new URLSearchParams(window.location.search)
+            const mode = urlParams.get('mode')
+            let speed = urlParams.get('speed')
+            speed = speed ? parseInt(speed) : 10
+
+            console.log(mode, speed)
+
+            let it = 0
+            let rgb = [255, 0, 0]
+            let addF = 1
+            let currDim = 0
+            let dimToChange = 1
+            const body = document.querySelector('body').style
+            let min = 0
+            let max = 255
+            let decalMin = 10
+            let decalMax = 2
+            setInterval(() => {
+                const dimP = dimToChange % 3
+                if (rgb[dimP] >= max && dimToChange > currDim) {
+                    it++
+                    currDim = it
+                    dimToChange = it - 1
+                    addF *= -1
+                    if (mode == "anguish") {
+                        max = max <= min ? 255 : max - decalMax
+                        min = min >= max? 0 : min + decalMin
+                    }
+                } else if (rgb[dimP] <= min && currDim > dimToChange) {
+                    dimToChange = it + 1
+                    addF *= -1
+                } else {
+                    console.log("nani")
+                }
+
+                rgb[dimP] += addF
+                // body.backgroundColor = "#"+ rgb.map(v => {return v.toString(16)}).join('')
+                body.backgroundColor = "rgba("+ rgb.join(",") + ")"
+            }, speed)
+
+        </script>
+    </body>
+</html>
